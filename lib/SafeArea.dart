@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/User.dart';
-import 'package:flutter_app/UserListTileWidget.dart';
+import 'package:flutter_app/UserListView.dart';
 
 class MySafeArea extends StatefulWidget{
   @override
@@ -83,7 +83,7 @@ class _MySafeAreaState extends State{
                     },
                   ),
                 ),
-                UserListTileWidget(users: _users,),
+                UserListView(users: _users,),
               ],
             ),
           )
