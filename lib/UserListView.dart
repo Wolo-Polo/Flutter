@@ -33,7 +33,7 @@ class UserListView extends StatelessWidget{
     //1. ListView(child: <Widget>[]) ==> to load all children at the same time
     //2. ListView(itemBuilder: ...) ==> to load only visible items
     return Container(
-      height: 500,
+      height: 300,
       child: buildListView(),
     );
   }
