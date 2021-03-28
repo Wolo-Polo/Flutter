@@ -30,11 +30,84 @@ class _MySafeAreaState extends State {
     }
   }
 
+  void _buildModalBottomSheet(){
+    showModalBottomSheet(
+        context: this.context,
+        builder: (context){
+          return Container(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(labelText: "User name"),
+                  controller: _userNameController,
+                  onChanged: (text) {
+                    _user.userName = text;
+                  },
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: "Password"),
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  controller: _passwordController,
+                  onChanged: (password) {
+                    _user.password = password;
+                  },
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: "Code"),
+                  keyboardType: TextInputType.number,
+                  controller: _codeController,
+                  onChanged: (number) {
+                    _user.code = int.parse(number) ?? 0; //if tect = null or convert fail ==> _code = 0
+                  },
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: SizedBox(
+                          height: 40,
+                          child: RaisedButton(
+                            color: Colors.red,
+                            textColor: Colors.white,
+                            child: Text("Cancle"),
+                            onPressed: (){
+
+                            },
+                          ),
+                        )
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 10)),
+                    Expanded(
+                        child: SizedBox(
+                          height: 40,
+                          child: RaisedButton(
+                            color: Colors.green,
+                            textColor: Colors.white,
+                            child: Text("Save"),
+                            onPressed: (){
+                              _insertUser();
+                            },
+                          ),
+                        )
+                    )
+                  ],
+                ),
+              ],
+            ),
+          );
+            
+        }
+    );
+  }
+
+  void _buildMaterialApp(){
+
+  }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "My SafeArea, Column, FlatButton, TextField",
-      home: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             title: Text("My AppBar"),
             backgroundColor: Colors.red,
@@ -43,7 +116,7 @@ class _MySafeAreaState extends State {
                   icon: Icon(Icons.add),
                   onPressed: () {
                     setState(() {
-                      _insertUser();
+                      _buildModalBottomSheet();
                     });
                     print('press add icon button');
                   })
@@ -52,12 +125,9 @@ class _MySafeAreaState extends State {
           floatingActionButton: FloatingActionButton(
             tooltip: "Add new user",
             child: Icon(Icons.add),
-            
             backgroundColor: Colors.red,
             onPressed: () {
-              setState(() {
-                _insertUser();
-              });
+              _buildModalBottomSheet();
             },
           ),
           key: _scaffoldKey,
@@ -68,31 +138,6 @@ class _MySafeAreaState extends State {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    TextField(
-                      decoration: InputDecoration(labelText: "User name"),
-                      controller: _userNameController,
-                      onChanged: (text) {
-                        _user.userName = text;
-                      },
-                    ),
-                    TextField(
-                      decoration: InputDecoration(labelText: "Password"),
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      controller: _passwordController,
-                      onChanged: (password) {
-                        _user.password = password;
-                      },
-                    ),
-                    TextField(
-                      decoration: InputDecoration(labelText: "Code"),
-                      controller: _codeController,
-                      onChanged: (number) {
-                        _user.code = int.parse(number) ??
-                            0; //if tect = null or convert fail ==> _code = 0
-                      },
-                    ),
                     Padding(padding: const EdgeInsets.symmetric(vertical: 10)),
                     ButtonTheme(
                       height: 40,
@@ -102,9 +147,12 @@ class _MySafeAreaState extends State {
                         textColor: Colors.white,
                         onPressed: () {
                           //print("Username: ${_user.userName} Code: ${_user.code}");
+                          /*
                           setState(() {
                             _insertUser();
                           });
+                          */
+                          _buildModalBottomSheet();
 
                           _scaffoldKey.currentState.showSnackBar(SnackBar(
                             //content: Text("Username: ${_user.userName} \nCode: ${_user.code}"),
@@ -119,7 +167,6 @@ class _MySafeAreaState extends State {
                 ),
               )
           )
-      ),
-    );
+      );
   }
 }
