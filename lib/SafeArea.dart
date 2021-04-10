@@ -63,37 +63,47 @@ class _MySafeAreaState extends State {
                     _user.code = int.parse(number) ?? 0; //if tect = null or convert fail ==> _code = 0
                   },
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: SizedBox(
-                          height: 40,
-                          child: RaisedButton(
-                            color: Colors.red,
-                            textColor: Colors.white,
-                            child: Text("Cancle"),
-                            onPressed: (){
+                Container(
+                  padding: EdgeInsets.only(top: 10),
+                  child: (
+                      Row(
+                        children: [
+                          Expanded(
+                              child: SizedBox(
+                                height: 40,
+                                child: RaisedButton(
+                                  color: Colors.red,
+                                  textColor: Colors.white,
+                                  child: Text("Cancle"),
+                                  onPressed: (){
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              )
+                          ),
+                          Padding(padding: EdgeInsets.only(left: 10)),
+                          Expanded(
+                              child: SizedBox(
+                                height: 40,
+                                child: RaisedButton(
+                                  color: Colors.green,
+                                  textColor: Colors.white,
+                                  child: Text("Save"),
+                                  onPressed: (){
+                                    setState(() {
+                                      _insertUser();
+                                      Navigator.of(context).pop();
+                                    });
 
-                            },
-                          ),
-                        )
-                    ),
-                    Padding(padding: EdgeInsets.only(left: 10)),
-                    Expanded(
-                        child: SizedBox(
-                          height: 40,
-                          child: RaisedButton(
-                            color: Colors.green,
-                            textColor: Colors.white,
-                            child: Text("Save"),
-                            onPressed: (){
-                              _insertUser();
-                            },
-                          ),
-                        )
-                    )
-                  ],
+                                  },
+                                ),
+                              )
+                          )
+                        ],
+                      )
+                  ),
                 ),
+
               ],
             ),
           );
@@ -154,11 +164,11 @@ class _MySafeAreaState extends State {
                           */
                           _buildModalBottomSheet();
 
-                          _scaffoldKey.currentState.showSnackBar(SnackBar(
-                            //content: Text("Username: ${_user.userName} \nCode: ${_user.code}"),
-                            content: Text("${_users.toString()}"),
-                            duration: Duration(seconds: 3),
-                          ));
+                          // _scaffoldKey.currentState.showSnackBar(SnackBar(
+                          //   //content: Text("Username: ${_user.userName} \nCode: ${_user.code}"),
+                          //   content: Text("${_users.toString()}"),
+                          //   duration: Duration(seconds: 3),
+                          // ));
                         },
                       ),
                     ),
