@@ -7,6 +7,11 @@ void main() {
   runApp(
       MaterialApp(
         title: "My SafeArea, Column, FlatButton, TextField",
+        theme: ThemeData(
+          primaryColor: Colors.red,
+          accentColor: Colors.green,
+          fontFamily: "Lobster-Regular",
+        ),
         home: MySafeArea()
       )
   );

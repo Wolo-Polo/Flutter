@@ -118,7 +118,7 @@ class _MySafeAreaState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
+         appBar: AppBar(
             title: Text("My AppBar"),
             backgroundColor: Colors.red,
             actions: [
@@ -135,7 +135,8 @@ class _MySafeAreaState extends State {
           floatingActionButton: FloatingActionButton(
             tooltip: "Add new user",
             child: Icon(Icons.add),
-            backgroundColor: Colors.red,
+            backgroundColor: Theme.of(context).primaryColor,//Colors.red,
+            hoverColor: Theme.of(context).accentColor,
             onPressed: () {
               _buildModalBottomSheet();
             },
@@ -152,7 +153,10 @@ class _MySafeAreaState extends State {
                     ButtonTheme(
                       height: 40,
                       child: FlatButton(
-                        child: Text("Insert new user"),
+                        child: Text(
+                          "Insert new user",
+                          style: const TextStyle(fontSize: 18, fontFamily: "Lobster-Regular"),
+                        ),
                         color: Colors.blue,
                         textColor: Colors.white,
                         onPressed: () {
